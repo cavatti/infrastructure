@@ -24,13 +24,13 @@ jobs:
           export BUCKET_NAME=$(echo "${{ github.event.issue.body.title }}")
           echo "Bucket Name: $BUCKET_NAME"
           echo "BUCKET_NAME=$BUCKET_NAME" >> $GITHUB_ENV
-      
-            - name: Run Terraform
+          
+      - name: Run Terraform
         run: |
           cd terraform/s3-bucket-static
           terraform init
           terraform apply -auto-approve -var="bucket_name=${{ env.BUCKET_NAME }}"
-
+  
           
       - name: Add comment
         run: gh issue comment "$NUMBER" --repo "$REPO" --body "$BODY"
