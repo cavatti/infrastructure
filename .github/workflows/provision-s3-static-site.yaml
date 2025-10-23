@@ -22,6 +22,14 @@ jobs:
         with:
           terraform_version: 1.9.8
 
+      # Configurar credenciais AWS a partir dos secrets
+      - name: Configurar AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
       - name: Inicializar Terraform
         run: terraform init
         working-directory: terraform/s3-bucket-static
@@ -31,7 +39,7 @@ jobs:
         working-directory: terraform/s3-bucket-static
 
       - name: Aplicar Terraform
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve -var="bucket_name=static-site-static-site"
         working-directory: terraform/s3-bucket-static
 
       - name: Comentar na issue
