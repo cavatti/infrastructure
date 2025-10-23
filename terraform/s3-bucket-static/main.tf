@@ -32,7 +32,7 @@ resource "aws_s3_bucket_ownership_controls" "static_site_bucket" {
   bucket = aws_s3_bucket.static_site_bucket.id
 
   rule {
-    object_ownership = "aws_s3_bucket_ownership_preferred"
+    object_ownership = "BucketOwnerPreferred"
   }
 }
 
