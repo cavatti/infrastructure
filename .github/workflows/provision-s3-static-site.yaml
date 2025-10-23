@@ -41,7 +41,7 @@ jobs:
         working-directory: terraform/s3-bucket-static
 
       - name: Aplicar Terraform
-        run: terraform apply -auto-approve -var="bucket_name=static-site-static-site"
+        run: terraform apply -auto-approve -var="bucket_name=landing-page-12345"
         working-directory: terraform/s3-bucket-static
 
       - name: Comentar na issue
