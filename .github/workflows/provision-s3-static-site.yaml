@@ -1,9 +1,11 @@
 name: Terraform Deploy
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: "Número da issue para comentar"
+        required: true
 
 permissions:
   contents: read      # Necessário para o checkout do código
@@ -46,6 +48,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
-          NUMBER: ${{ github.event.issue.number }}
+          NUMBER: ${{ github.event.inputs.issue_number }}
           BODY: "✅ Deploy do Terraform finalizado com sucesso!"
         run: gh issue comment "$NUMBER" --repo "$REPO" --body "$BODY"
