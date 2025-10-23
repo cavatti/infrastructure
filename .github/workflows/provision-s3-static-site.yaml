@@ -1,4 +1,4 @@
-nome: Create S3 Static Site
+name: Create S3 Static Site
 
 on:
   issues:
